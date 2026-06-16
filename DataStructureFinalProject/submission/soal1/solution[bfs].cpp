@@ -28,7 +28,6 @@ vector<Cell> solve(vector<vector<char>>& grid, Cell start, Cell goal) {
             int nc = curr.second + dc[i];
 
             if (!inBounds(nr, nc)) continue;
-            if (isWall(grid[nr][nc])) continue;
 
             Cell neighbor = {nr, nc};
             if (seen.count(neighbor)) continue;
