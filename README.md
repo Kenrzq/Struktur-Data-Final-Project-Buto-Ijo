@@ -1,5 +1,11 @@
 # Struktur-Data-Final-Project-Buto-Ijo
 
+|    NRP     |           Nama             |
+| :--------: |       :------------:       |
+| Aqilah Ibrahim | 5025251260                    |
+| Athar Rozy Rasyidan | 5025251009                 |
+| Rizqi Arya Kuskhilbyano | 5025251161                    |
+
 ## Comparison Table & Multi-Scenario Analysis
 
 | Algorithm | Soal 1 | Soal 2 | Soal 3 |
