@@ -1,27 +1,125 @@
 # Struktur-Data-Final-Project-Buto-Ijo
 
-|    NRP     |           Nama             |
+|    Nama     |           NRP             |
 | :--------: |       :------------:       |
-| Aqilah Ibrahim | 5025251260                    |
-| Athar Rozy Rasyidan | 5025251009                 |
-| Rizqi Arya Kuskhilbyano | 5025251161                    |
-
-## Comparison Table & Multi-Scenario Analysis
-
-| Algorithm | Soal 1 | Soal 2 | Soal 3 |
-| :--- | :--- | :--- | :--- |
-| | **(Visited / Cost / Len)**<br> Analisis Rute & Kelayakan | **(Visited / Cost / Len)**<br> Analisis Rute & Kelayakan | **(Visited / Cost / Len)**<br> Analisis Rute & Kelayakan |
-| **Breadth-First Search (BFS)** | **36 / 11 / 11**<br><br>• **Rute:** Mengeksplorasi secara radial/melingkar lapis demi lapis (antrean FIFO). Jarak diukur murni dari jumlah langkah kaki (`PathLen`).<br>• **Kelayakan (YA - Optimal):** Karena seluruh bobot sel bernilai seragam (`1`), langkah kaki tersedikit otomatis menghasilkan biaya termurah sejati. | **35 / 14 / 14**<br><br>• **Rute:** Menyebar radial melewati koridor kosong dan mendeteksi jalan keluar labirin berdasarkan jumlah langkah terkecil.<br>• **Kelayakan (YA - Optimal):** Sama seperti Soal 1, karena tidak ada variasi biaya antar sel, pencarian berbasis level BFS menjamin rute terpendek. | **254 / 59 / 43**<br><br>• **Rute:** Buta terhadap fungsi bobot `cellCost()`. Demi mengejar jumlah langkah tersedikit (`PathLen: 43`), BFS langsung menerobos barisan jebakan angka 9.<br>• **Kelayakan (TIDAK - Gagal):** Hasilnya sangat buruk secara ekonomi karena rute pilihan bernilai sangat mahal (`TotalCost: 59`). |
-| **Depth-First Search (DFS)** | **21 / 21 / 21**<br><br>• **Rute:** Menggunakan tumpukan LIFO. Menusuk lurus menyusuri tepian grid terlebih dahulu hingga mentok baru berbelok ke arah target.<br>• **Kelayakan (TIDAK - Buruk):** Menghasilkan lintasan berliku yang tidak efisien karena tidak memiliki fungsi optimasi jalur. | **18 / 14 / 14**<br><br>• **Rute:** Terjadi anomali di mana arah eksplorasi kebetulan langsung membimbing gerakan meluncur searah koridor labirin yang kosong.<br>• **Kelayakan (YA - Kebetulan):** Hasilnya seoptimal BFS dengan sel diperiksa yang sangat minim (`Visited: 18`). Namun ini murni faktor keberuntungan urutan kode. | **338 / 131 / 107**<br><br>• **Rute:** Tersesat berputar-putar di dalam grid yang luas. Begitu menyentuh target untuk pertama kalinya, ia langsung mengunci rute tersebut.<br>• **Kelayakan (TIDAK - Sangat Buruk):** Terjadi pembengkakan masif pada jumlah langkah dan biaya (`Cost: 131`, `Len: 107`) karena ketiadaan fungsi pembanding kualitas rute. |
-| **Dijkstra's Algorithm** | **36 / 11 / 11**<br><br>• **Rute:** Menggunakan *Priority Queue* (Min-Heap) berbasis biaya akumulatif dari titik awal ($g(n)$). Menjelajah radial ke segala arah.<br>• **Kelayakan (YA - Optimal):** Menemukan rute terpendek mutlak. Perilaku identik dengan BFS karena variasi bobot sel masih seragam. | **37 / 14 / 14**<br><br>• **Rute:** Mengevaluasi akumulasi biaya di setiap persimpangan dinding labirin untuk memastikan efisiensi rute terbaik.<br>• **Kelayakan (YA - Optimal):** Berhasil menemukan rute termurah, namun kurang efisien secara performa (`Visited` tertinggi: 37 sel) akibat *overhead* struktur data Min-Heap pada grid tanpa bobot bervariasi. | **436 / 43 / 43**<br><br>• **Rute:** Berhasil mengevaluasi perbedaan biaya sel. Dijkstra memilih melakukan *detour* (memutar jauh ke sisi kanan map) untuk menghindari rintangan angka 9.<br>• **Kelayakan (YA - Jaminan Optimalitas Mutlak):** Mengamankan biaya minimum sejati (**43**). Kelemahannya, ia terpaksa memeriksa **436 sel** karena menyebar ke segala arah tanpa petunjuk arah target. |
-| **A* Search** | **36 / 11 / 11**<br><br>• **Rute:** Menyempurnakan Dijkstra dengan fungsi heuristik jarak prediksi *Manhattan Distance* menuju Goal ($f(n) = g(n) + h(n)$).<br>• **Kelayakan (YA - Optimal):** Menemukan rute terpendek yang sama dengan BFS dan Dijkstra pada grid terbuka. | **28 / 14 / 14**<br><br>• **Rute:** Heuristik memfokuskan arah ekspansi agar lurus membidik posisi target, membatasi sirkulasi pencarian di area yang salah.<br>• **Kelayakan (YA - Paling Optimal):** Menemukan jalur terpendek yang sama, tetapi sukses memotong jumlah sel yang diperiksa (`Visited: 28` vs BFS: 35). | **354 / 43 / 43**<br><br>• **Rute:** Menemukan lintasan memutar menghindari angka 9 dengan tingkat keandalan biaya yang persis sama optimalnya dengan Dijkstra.<br>• **Kelayakan (YA - Hasil Terbaik Keseluruhan):** Berkat kecerdasan fungsi Heuristik yang menahan algoritma agar tidak melebar ke arah yang membelakangi target, A* sukses **menghemat komputasi dengan memangkas 82 sel** yang tidak perlu diperiksa dibanding Dijkstra. |
-
-*Keterangan pengisian angka: **Visited** (Jumlah sel dieksplorasi) / **TotalCost** (Total biaya lintasan) / **PathLen** (Panjang langkah lintasan).*
+| Aqilah Ibrahim | 5025251260             |
+| Athar Rozy Rasyidan | 5025251009        |
+| Rizqi Arya Kuskhilbyano | 5025251161    |
 
 ---
 
-## Kesimpulan Analisis
+## Grid Problems
 
-1. **Skenario Uniform / Tanpa Bobot (Soal 1 & Soal 2):** **BFS** menjadi pilihan paling praktis karena strukturnya yang sederhana tanpa beban komputasi pengurutan data (*sorting*). Namun, jika ingin meminimalkan jumlah eksplorasi node pada labirin berdinding, **A* Search** terbukti lebih efisien dalam memangkas jumlah *visited cells*.
-2. **Skenario Berbobot Kompleks & Skala Besar (Soal 3):** **A* Search** merupakan algoritma terbaik. Ia memberikan jaminan akurasi rute termurah sejati (setara dengan Dijkstra) namun bekerja jauh lebih cepat dan hemat memori dengan membatasi ruang sirkulasi pencarian sel memanfaatkan fungsi heuristik.
-3. **DFS** tidak direkomendasikan untuk keperluan pencarian jalur terpendek (*pathfinding*) karena sifat pencariannya yang tidak memiliki garansi optimalitas rute, sehingga hasilnya sangat bergantung pada faktor keberuntungan struktur peta dan urutan arah mata angin pada kode.
+1. 6×6 Open Grid
+
+S . . . . .
+. . . . . .
+. . . . . .
+. . . . . .
+. . . . . .
+. . . . . G
+
+No walls, no weights. Every cell costs 1. A clean baseline to compare algorithm traversal order.
+
+2. 8×8 Grid with Walls
+S . . # . . . .
+. # . # # # . .
+. # . . . # . .
+. # # # . # . #
+. . . # . . . .
+# # . # # # # .
+. . . . . . . .
+. # # # # # . G
+
+Walls (#) force the algorithms to navigate around obstacles. Tests path reconstruction correctness under constrained topology.
+
+3. 16×32 Weighted Grid
+S . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . # . . . . . . . . . . 3 . . . . . . . . . . . . . . . .
+. . # . . . . . . . . 2 . . . . . . . # . . . . . . . . . . . .
+. . . . . . . . . # . . . . . . . . . # . . . . . . . . . . . .
+. . . . . . . . . . . . . # . . . . . . . . . . . . 2 . . . . .
+. . . . . . . 2 . . . . . . . . . . . . . # . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 .
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . 2 . . . . . . . . . . . # . . . . . . . . . . . .
+. . . . . . . . . . . # . . . . . 3 . . . . . . . . . . . . . .
+. . # . . . . . . . . . . . . . . . . . . . . # . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 . . .
+. . . . . 2 . . . . . . . # . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . G
+
+Cell weights: 
+2 = cost 2
+3 = cost 3
+9 = cost 9
+. = cost 1
+# = impassable wall
+
+The design for this map where there are rows of cost 9 cells makes crossing the shortest past more expensive in cost. The only free cost detour is through the single gap at right side of the grid.
+
+
+---
+
+## How to Compile & Run
+```
+# From within the submission/soalX/ directory
+g++ -O2 -std=c++17 solution[algorithm].cpp -o algorithm.exe
+./algorithm ../../maps/soalx.txt output[algorithm].txt
+open engine/index.html, select the question/map, drag output.txt, click Play/Run.
+```
+
+## Output Format 
+```
+VISITED
+row,col
+row,col
+...
+PATH
+row,col
+row,col
+...
+```
+
+VISITED lists every cell explored (in order). 
+PATH lists the cells from S to G in the found route.
+
+---
+
+## Results Summary
+
+| Problem | Algorithm | Visited | Total Cost | Path Length |
+| :--------: | :----------: | :--------: | :--------: | :--------: |
+| Soal 1 | BFS | 36 | 10 | 10 |
+| Soal 1 | DFS | 21 | 20 | 20 |
+| Soal 1 | Dijkstra | 36 | 10 | 10 |
+| Soal 1 | A* | 36 | 10 | 10 |
+| Soal 2 | BFS | 35 | 14 | 14 |
+| Soal 2 | DFS | 18 | 14 | 14 |
+| Soal 2 | Dijkstra | 37 | 14 | 14 |
+| Soal 2 | A* | 28 | 14 | 14 |
+| Soal 3 | BFS | 272 | 294 | 46 |
+| Soal 3 | DFS | 149 | 322 | 145 |
+| Soal 3 | Dijkstra | 278 | 46 | 46 |
+| Soal 3 | A* | 151 | 46 | 46 |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
