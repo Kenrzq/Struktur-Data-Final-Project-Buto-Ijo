@@ -1,21 +1,20 @@
 # Struktur-Data-Final-Project-Buto-Ijo
 
-- SOAL 1
+## Comparison Table & Analysis
 
+| Algorithm | Soal 1 (Visited / Cost / Len) | Soal 2 (Visited / Cost / Len) | Soal 3 (Visited / Cost / Len) | Karakteristik & Alasan Memilih Rute | Analisis Kelayakan Jalur (Shortest Path?) |
+| :--- | :---: | :---: | :---: | :--- | :--- |
+| **Breadth-First Search (BFS)** | 36 / 11 / 11 | 35 / 14 / 14 | 254 / 59 / 43 | Beroperasi dengan antrean **FIFO**. Mengeksplorasi node tetangga lapis demi lapis secara radial melingkar. Mengukur jarak murni berdasarkan jumlah langkah (`PathLen`), buta terhadap beban atau bobot sel (`cellCost()`). | - **Soal 1 & 2 (YA - Optimal):** Karena bobot seragam (`1`), langkah kaki tersedikit otomatis menghasilkan biaya termurah sejati.<br>- **Soal 3 (TIDAK - Gagal):** Menerobos barisan jebakan angka `9` demi mengejar langkah tersedikit (`PathLen: 43`), sehingga rutenya menjadi sangat mahal (`TotalCost: 59`). |
+| **Depth-First Search (DFS)** | 21 / 21 / 21 | 18 / 14 / 14 | 338 / 131 / 107 | Beroperasi dengan tumpukan **LIFO**. Menusuk lurus ke satu arah sedalam mungkin sebelum melakukan *backtracking*. Jalur murni ditentukan oleh prioritas arah mata angin pada kode tanpa memedulikan optimasi langkah maupun biaya. | - **Soal 1 (TIDAK - Buruk):** Menyusuri tepi grid terlebih dahulu sebelum berbelok, menghasilkan rute berliku yang tidak efisien.<br>- **Soal 2 (YA - Kebetulan):** Menghasilkan lintasan optimal karena urutan tumpukan arah kebetulan langsung membimbing gerakan searah koridor kosong labirin.<br>- **Soal 3 (TIDAK - Sangat Buruk):** Tersesat berputar-putar pada grid luas dan mengunci rute acak pertama yang menyentuh target, memicu pembengkakan masif. |
+| **Dijkstra's Algorithm** | 36 / 11 / 11 | 37 / 14 / 14 | 436 / 43 / 43 | Menggunakan **Priority Queue (Min-Heap)** yang selalu mengekstraksi akumulasi biaya terkecil dari titik awal ($g(n)$). Terus memperbarui (*relaxing*) rute jika menemukan jalur alternatif yang lebih murah, berfokus pada efisiensi biaya akumulatif. | - **Soal 1 & 2 (YA - Optimal):** Menemukan rute terpendek mutlak, namun perilakunya identik dengan BFS karena bobot sel seragam. Mengalami *overhead* komputasi Min-Heap (`Visited: 37` pada Soal 2).<br>- **Soal 3 (YA - Jaminan Optimal Mutlak):** Berhasil mengevaluasi bahwa melakukan *detour* (memutar jauh ke kanan) untuk menghindari angka `9` jauh lebih murah secara matematis (`TotalCost: 43`). Namun, terpaksa memeriksa sel tertinggi (`436 sel`) karena mencari ke segala arah tanpa petunjuk target. |
+| **A* Search** | 36 / 11 / 11 | 28 / 14 / 14 | 354 / 43 / 43 | Menyempurnakan Dijkstra dengan menambahkan **fungsi heuristik prediksi jarak** menuju Goal ($f(n) = g(n) + h(n)$) menggunakan *Manhattan Distance*. Prioritas ekspansinya tidak menyebar radial melingkar, melainkan lurus membidik posisi target. | - **Soal 1 & 2 (YA - Paling Optimal):** Menemukan jalur terpendek yang sama, namun sukses memotong jumlah eksplorasi sel (`Visited` pada Soal 2 hanya `28` sel).<br>- **Soal 3 (YA - Hasil Terbaik):** Menemukan lintasan memutar dengan biaya seoptimal Dijkstra (`TotalCost: 43`). Berhasil menghemat komputasi dengan hanya mengunjungi `354 sel` (memangkas 82 sel dibanding Dijkstra) karena heuristik menahan ekspansi ke area yang membelakangi target. |
 
+*Format pengisian angka di dalam sel: **Visited** (Jumlah sel dieksplorasi) / **TotalCost** (Total biaya lintasan) / **PathLen** (Panjang langkah lintasan).*
 
+---
 
+## 4. Kesimpulan Analisis
 
-
-
-
-- SOAL 2
-
-
-
-
-
-
-
-
-- SOAL 3
+1. Untuk peta **tanpa bobot bervariasi** (Soal 1 & Soal 2), **BFS** adalah pilihan paling praktis karena strukturnya yang sederhana tanpa beban komputasi pengurutan data (*sorting*).
+2. Untuk peta **berbobot kompleks dan berskala besar** (Soal 3), **A* Search** merupakan algoritma superior yang wajib dipilih. A* memberikan jaminan akurasi rute termurah sejati (seperti Dijkstra) namun bekerja jauh lebih cepat dan hemat memori dengan membatasi ruang sirkulasi pencarian sel.
+3. **DFS tidak layak** digunakan untuk keperluan *pathfinding* karena sifat pencariannya yang tidak memiliki garansi optimalitas rute sama sekali.
