@@ -1,3 +1,21 @@
 # Struktur-Data-Final-Project-Buto-Ijo
 
-AYOKLEEE
+- SOAL 1 -
+
+
+
+
+
+
+
+
+- SOAL 2 -
+
+
+
+
+
+
+
+
+-SOAL 3 -
