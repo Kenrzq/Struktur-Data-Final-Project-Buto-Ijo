@@ -169,7 +169,7 @@ vector<Cell> solve(vector<vector<char>>& grid, Cell start, Cell goal) {
 
         if (curr == goal) break;
 
-        for (int i = 3; i >= 0; --i) {
+        for (int i = 0; i < 4; ++i) {
             int nr = curr.first + dr[i];
             int nc = curr.second + dc[i];
 
