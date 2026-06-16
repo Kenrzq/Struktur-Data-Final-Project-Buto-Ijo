@@ -37,7 +37,6 @@ vector<Cell> solve(vector<vector<char>>& grid, Cell start, Cell goal) {
             int nc = current.second + dc[k];
 
             if (!inBounds(nr, nc)) continue;
-            if (isWall(grid[nr][nc])) continue;
 
             Cell neighbor = {nr, nc};
             int new_g = g + cellCost(grid[nr][nc]);
