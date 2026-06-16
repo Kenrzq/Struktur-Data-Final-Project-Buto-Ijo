@@ -66,6 +66,7 @@ Cell weights:
 The design for this map where there are rows of cost 9 cells makes crossing the shortest past more expensive in cost. The only free cost detour is through the single gap at right side of the grid.
 
 ---
+# Algorithms
 
 ## BFS (Breadth First Search)
 Explore everything at distance 1, then distance 2, then distance 3... expanding outward like ripples in water.
@@ -96,7 +97,7 @@ while (!q.empty()) {
 ```
 The queue is what makes BFS work. When you add neighbors to the back and read from the front, you naturally process all cells at the current "ring" before moving to the next one. This guarantees that the first time you reach the goal, it's via the fewest steps.
 
-Why it fails on Soal 3: BFS treats every passable cell as equal cost. It doesn't know that 9 costs 9 — it just sees "passable" and crosses row 7 freely.
+Why it fails on Soal 3: BFS treats every passable cell as equal cost. It doesn't know that 9 costs 9, it just sees "passable" and crosses row 7 freely.
 
 ## DFS (Depth First Search)
 Commit fully to one direction, go as deep as possible, only backtrack when stuck.
