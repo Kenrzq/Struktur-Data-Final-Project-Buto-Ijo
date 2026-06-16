@@ -315,27 +315,6 @@ The Manhattan Distance heuristic is admissible — it never overestimates the tr
 
 ---
 
-## Performance Results
-
-| Problem | Algorithm | Visited | Total Cost | Path Length |
-|:---|:---|:---:|:---:|:---:|
-| **Soal 1** | **BFS BEST** | **36** | **10** | **10** |
-| | DFS | 21 | 20 | 20 |
-| | Dijkstra | 36 | 10 | 10 |
-| | A* | 36 | 10 | 10 |
-| **Soal 2** | BFS | 35 | 14 | 14 |
-| | **DFS BEST** | **18** | **14** | **14** |
-| | Dijkstra | 37 | 14 | 14 |
-| | A* | 28 | 14 | 14 |
-| **Soal 3** | BFS | 272 | 294 | 46 |
-| | DFS | 149 | 322 | 144 |
-| | Dijkstra | 278 | 46 | 46 |
-| | **A* BEST** | **151** | **46** | **46** |
-
-*Visited = total cells evaluated. Total Cost = sum of `cellCost` for each cell entered along the path. Path Length = number of steps (cells − 1).*
-
----
-
 ## How to Compile & Run
 
 ```bash
