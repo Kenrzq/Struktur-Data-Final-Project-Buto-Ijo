@@ -11,17 +11,19 @@
 ## Grid Problems
 
 1. 6×6 Open Grid
-
+```
 S . . . . .
 . . . . . .
 . . . . . .
 . . . . . .
 . . . . . .
 . . . . . G
+```
 
 No walls, no weights. Every cell costs 1. A clean baseline to compare algorithm traversal order.
 
 2. 8×8 Grid with Walls
+```
 S . . # . . . .
 . # . # # # . .
 . # . . . # . .
@@ -30,10 +32,12 @@ S . . # . . . .
 # # . # # # # .
 . . . . . . . .
 . # # # # # . G
+```
 
 Walls (#) force the algorithms to navigate around obstacles. Tests path reconstruction correctness under constrained topology.
 
 3. 16×32 Weighted Grid
+```
 S . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . .
 . . . . # . . . . . . . . . . 3 . . . . . . . . . . . . . . . .
 . . # . . . . . . . . 2 . . . . . . . # . . . . . . . . . . . .
@@ -50,6 +54,7 @@ S . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . .
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 . . .
 . . . . . 2 . . . . . . . # . . . . . . . . . . . . . . . . . .
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . G
+```
 
 Cell weights: 
 2 = cost 2
