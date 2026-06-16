@@ -96,7 +96,7 @@ BFS uses a FIFO queue to expand nodes level by level, visiting all cells at dist
 The implementation is identical across Soal 1, 2, and 3. Soal 2 and 3 add an `isWall` check; Soal 1 omits it since there are no walls.
 
 ```cpp
-// solution[bfs].cpp (soal2 / soal3 variant shown — soal1 omits the isWall check)
+// solution[bfs].cpp (soal2 / soal3 variant shown — soal1 does not have isWall check yet)
 vector<Cell> solve(vector<vector<char>>& grid, Cell start, Cell goal) {
 
     vector<Cell> visited;
@@ -148,7 +148,7 @@ DFS uses a LIFO stack to commit fully to one direction before backtracking. It e
 The loop runs `i = 3` down to `0` (reversed) because a stack reverses insertion order — pushing in reverse ensures direction index 0 (up) ends up on top and is explored first, keeping traversal order consistent.
 
 ```cpp
-// solution[dfs].cpp (soal2 / soal3 variant shown — soal1 omits the isWall check)
+// solution[dfs].cpp (soal2 / soal3 variant shown — soal1 does not have isWall check yet)
 vector<Cell> solve(vector<vector<char>>& grid, Cell start, Cell goal) {
 
     vector<Cell> visited;
