@@ -61,10 +61,9 @@ Cell weights:
 3 = cost 3
 9 = cost 9
 . = cost 1
-# = impassable wall
+'#' = impassable wall
 
 The design for this map where there are rows of cost 9 cells makes crossing the shortest past more expensive in cost. The only free cost detour is through the single gap at right side of the grid.
-
 
 ---
 
